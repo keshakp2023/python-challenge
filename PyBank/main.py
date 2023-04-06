@@ -1,7 +1,7 @@
 import os
 import csv
 
-
+# pulling data from csv file 
 csvpath = os.path.join('.','Resources', 'budget_data.csv')
 
 with open(csvpath, "r") as csvfile:
@@ -14,7 +14,7 @@ with open(csvpath, "r") as csvfile:
 
     csv_header = next(csvreader)
 
-#define Variable
+    #define Variable
  
     Total_months= 0
     net_total= 0
@@ -24,7 +24,7 @@ with open(csvpath, "r") as csvfile:
     greatest_value_increase = 0
     greatest_value_decrease = 0
 
-#finding total number of months by finding total number of rows
+    #finding total number of months by finding total number of rows
     
     for index, row in enumerate(csvreader):
         Total_months += 1 
@@ -36,7 +36,7 @@ with open(csvpath, "r") as csvfile:
             previous_revenue = int(row[1])
             list_of_revenue.append(revenue_diff)
 
-#finde average change and greatest increase and decrease percentage 
+        #finde average change and greatest increase and decrease percentage 
 
         if greatest_value_increase < revenue_diff:
             greatest_value_increase = revenue_diff
@@ -58,7 +58,9 @@ print(f"Greatest Decrease in Profits: {greatest_date_decrease} ${greatest_value_
 
 # exporting to text file 
 
-with open(os.path.join("output-file.txt"), "w") as textfile:
+with open(os.path.join("Analysis", "output-file.txt"), "w") as textfile:
+    textfile.write(f"Financial Analysis\n")
+    textfile.write(f"----------------------------\n")
     textfile.write(f"Total Months: {Total_months}\n") 
     textfile.write(f"Total: $ {net_total}\n")  
     textfile.write(f"Average Change: $ {revenue_average}\n") 
